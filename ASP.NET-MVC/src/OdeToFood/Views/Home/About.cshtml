@@ -1,4 +1,6 @@
-﻿@{
+﻿@model AboutModel
+
+@{
     ViewData["Title"] = "About";
 }
 <h2>@ViewData["Title"].</h2>
@@ -7,3 +9,4 @@
 <p>Use this area to provide additional information.</p>
 
 <div> Location: @ViewData["Location"] </div> 
+<div> Location (from directive): @Model.Location</div> 

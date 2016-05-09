@@ -5,9 +5,10 @@ namespace OdeToFood.Controllers
     public class CuisineController : Controller
     {
         // GET: /Cuisine/
-        public IActionResult Search()
+        public IActionResult Search(string name)
         {
-            return Content("Hello!");
+            // TODO: this is xss vulnerable
+            return Content("Hello! " + name);
         }
     }
 }

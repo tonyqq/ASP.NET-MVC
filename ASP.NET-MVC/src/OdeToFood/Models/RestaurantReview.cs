@@ -12,6 +12,8 @@ namespace OdeToFood.Models
 
         public string City { get; set; }
 
+        [Display(Name = "Home country")]
+        [DisplayFormat(NullDisplayText = "anonymous")]
         public string Country { get; set; }
 
         [Range(1,10)]

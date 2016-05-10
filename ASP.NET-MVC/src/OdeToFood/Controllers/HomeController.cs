@@ -10,6 +10,11 @@ namespace OdeToFood.Controllers
             return View();
         }
 
+        public IActionResult MyDefault()
+        {
+            return Content("Hello from MyDefault() of HomeController!");
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

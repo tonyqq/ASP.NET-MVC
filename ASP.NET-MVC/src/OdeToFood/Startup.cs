@@ -60,6 +60,9 @@ namespace OdeToFood
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddInstance<IGreetingService>(new GreetingService());
+            //services.AddTransient<IGreetingService>(p => new GreetingService()); // give me new instatnce everytime someone needs on
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

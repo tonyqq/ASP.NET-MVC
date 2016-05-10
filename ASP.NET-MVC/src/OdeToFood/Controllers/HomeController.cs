@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNet.Mvc;
 using OdeToFood.Models;
+using OdeToFood.Services;
 
 namespace OdeToFood.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IGreetingService _greetingService;
+
+        public HomeController(IGreetingService greetingService)
+        {
+            _greetingService = greetingService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -12,7 +20,8 @@ namespace OdeToFood.Controllers
 
         public IActionResult MyDefault()
         {
-            return Content("Hello from MyDefault() of HomeController!");
+            var greeting = _greetingService.GetTodaysGreeting();
+            return View(greeting);
         }
 
         public IActionResult About()

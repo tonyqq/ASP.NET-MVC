@@ -23,6 +23,7 @@ namespace OdeToFood
 
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddJsonFile("myconfig.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
             if (env.IsDevelopment())
@@ -61,7 +62,7 @@ namespace OdeToFood
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
-            services.AddInstance<IGreetingService>(new GreetingService());
+            services.AddInstance<IGreetingService>(new GreetingService(Configuration));
             //services.AddTransient<IGreetingService>(p => new GreetingService()); // give me new instatnce everytime someone needs on
         }
 

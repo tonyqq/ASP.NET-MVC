@@ -1,4 +1,6 @@
-﻿namespace OdeToFood.Services
+﻿using Microsoft.Extensions.Configuration;
+
+namespace OdeToFood.Services
 {
     public class GreetingMessage
     {
@@ -20,11 +22,19 @@
 
     public class GreetingService : IGreetingService
     {
+        private readonly IConfiguration _config;
+
+        public GreetingService(IConfiguration config)
+        {
+            _config = config;
+        }
+
         private int _id = 1;
 
         public GreetingMessage GetTodaysGreeting()
         {
-            return new GreetingMessage(_id++, "Hello from the greeting service");
+            var text = _config.Get<string>("message");
+            return new GreetingMessage(_id++, text);
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿@*example of tag helper*@
+
+@model OdeToFood.Services.GreetingMessage
+
+<p>This is example of tag helpers</p>
+<form asp-controller="Home" asp-action="MyDefault2" method="get">
+    <div>
+        <label asp-for="Id">Id is @Model.Id</label>
+        <input asp-for="Text"/>
+    </div>
+</form>

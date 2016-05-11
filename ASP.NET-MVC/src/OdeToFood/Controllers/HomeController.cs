@@ -24,6 +24,13 @@ namespace OdeToFood.Controllers
             return View(greeting);
         }
 
+        // Example of tag helpers
+        public IActionResult MyDefault2()
+        {
+            var greeting = _greetingService.GetTodaysGreeting();
+            return View(greeting);
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

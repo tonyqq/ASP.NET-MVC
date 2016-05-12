@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
 using OdeToFood.Models;
 using OdeToFood.Services;
@@ -68,7 +65,7 @@ namespace OdeToFood.Controllers
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, model.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {
@@ -314,12 +311,12 @@ namespace OdeToFood.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+                return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
             }
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+                return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
             }
             AddErrors(result);
             return View();
@@ -385,7 +382,7 @@ namespace OdeToFood.Controllers
                 await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
             }
 
-            return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, model.ReturnUrl, model.RememberMe });
         }
 
         //
